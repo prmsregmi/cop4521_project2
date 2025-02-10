@@ -17,7 +17,7 @@ def handle_request(client_socket, flask_app):
 
     try:
         # Parse HTTP request line
-        request_line, _ = request_data.split(b"\r\n\r\n", 1)
+        request_line, _ = request_data.split(b"\r\n", 1)
         request_line_parts = request_line.split(b" ")
         method = request_line_parts[0].decode()
         path = request_line_parts[1].decode()
@@ -56,7 +56,7 @@ def handle_request(client_socket, flask_app):
     finally:
         client_socket.close()
 
-def create_unix_server(flask_app, socket_path="/tmp/myapp.sock"):
+def create_unix_server(flask_app, socket_path="/tmp/flask.sock"):
     # Remove any existing socket file
     if os.path.exists(socket_path):
         os.remove(socket_path)
